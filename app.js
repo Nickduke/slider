@@ -1,6 +1,6 @@
 const slides = document.querySelectorAll('.slide');
 const nextBtn = document.querySelector('.nextBtn');
-const prevtBtn = document.querySelector('.prevBtn');
+const prevBtn = document.querySelector('.prevBtn');
 
 slides.forEach((slide, index) => {
   slide.style.left = `${index * 100}%`;
@@ -13,19 +13,36 @@ nextBtn.addEventListener('click', () => {
   carousel();
 });
 
-prevBtn.addEventListener('click', () => {
+prevBtn.addEventListener('click', function () {
   counter--;
   carousel();
 });
 
 function carousel() {
-  if (counter === slides.length) {
-    counter = 0;
+  // if (counter === slides.length) {
+  //   counter = 0;
+  // }
+  // if (counter < 1) {
+  //   counter = slides.length - 1;
+  // }
+
+  // button approach
+  if (counter < slides.length - 1) {
+    nextBtn.style.display = 'block';
+  } else {
+    nextBtn.style.display = 'none';
   }
-  if (counter < 1) {
-    counter = slides.length - 1;
+
+  if (counter > 0) {
+    prevBtn.style.display = 'block';
+  } else {
+    prevBtn.style.display = 'none';
   }
-  slides.forEach((slide) => {
+
+  slides.forEach(function (slide) {
     slide.style.transform = `translateX(-${counter * 100}%)`;
   });
 }
+
+// hidden button approach
+prevBtn.style.display = 'none';
